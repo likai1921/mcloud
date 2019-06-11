@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cloud.web.model.Cfg;
 import com.cloud.web.service.CfgService;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @RestController
