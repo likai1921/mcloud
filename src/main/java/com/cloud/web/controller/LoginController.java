@@ -1,10 +1,7 @@
 package com.cloud.web.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cloud.web.model.Cfg;
 import com.cloud.web.service.CfgService;
-
 import net.sf.json.JSONObject;
-
+/**
+ * 登陆
+ * @author Administrator
+ *
+ */
 @RestController
 @RequestMapping("/mcloud")
 public class LoginController {
