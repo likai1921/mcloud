@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.web.mapper.GroupMsgMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.web.model.GroupMsg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_msg_type" jdbcType="INTEGER" property="groupMsgType" />
+    <result column="group_file_id" jdbcType="VARCHAR" property="groupFileId" />
+    <result column="group_msg_send_mei_id" jdbcType="BIGINT" property="groupMsgSendMeiId" />
+    <result column="group_msg" jdbcType="VARCHAR" property="groupMsg" />
+    <result column="group_send_time" jdbcType="TIMESTAMP" property="groupSendTime" />
+    <result column="group_msg_timeout" jdbcType="INTEGER" property="groupMsgTimeout" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_id, group_msg_type, group_file_id, group_msg_send_mei_id, group_msg, group_send_time, 
+    group_msg_timeout
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_group_msg
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_group_msg
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.web.model.GroupMsg">
+    insert into t_group_msg (id, group_id, group_msg_type, 
+      group_file_id, group_msg_send_mei_id, group_msg, 
+      group_send_time, group_msg_timeout)
+    values (#{id,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{groupMsgType,jdbcType=INTEGER}, 
+      #{groupFileId,jdbcType=VARCHAR}, #{groupMsgSendMeiId,jdbcType=BIGINT}, #{groupMsg,jdbcType=VARCHAR}, 
+      #{groupSendTime,jdbcType=TIMESTAMP}, #{groupMsgTimeout,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.web.model.GroupMsg">
+    insert into t_group_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupMsgType != null">
+        group_msg_type,
+      </if>
+      <if test="groupFileId != null">
+        group_file_id,
+      </if>
+      <if test="groupMsgSendMeiId != null">
+        group_msg_send_mei_id,
+      </if>
+      <if test="groupMsg != null">
+        group_msg,
+      </if>
+      <if test="groupSendTime != null">
+        group_send_time,
+      </if>
+      <if test="groupMsgTimeout != null">
+        group_msg_timeout,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsgType != null">
+        #{groupMsgType,jdbcType=INTEGER},
+      </if>
+      <if test="groupFileId != null">
+        #{groupFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMsgSendMeiId != null">
+        #{groupMsgSendMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsg != null">
+        #{groupMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="groupSendTime != null">
+        #{groupSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupMsgTimeout != null">
+        #{groupMsgTimeout,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.web.model.GroupMsg">
+    update t_group_msg
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsgType != null">
+        group_msg_type = #{groupMsgType,jdbcType=INTEGER},
+      </if>
+      <if test="groupFileId != null">
+        group_file_id = #{groupFileId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMsgSendMeiId != null">
+        group_msg_send_mei_id = #{groupMsgSendMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsg != null">
+        group_msg = #{groupMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="groupSendTime != null">
+        group_send_time = #{groupSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupMsgTimeout != null">
+        group_msg_timeout = #{groupMsgTimeout,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.web.model.GroupMsg">
+    update t_group_msg
+    set group_id = #{groupId,jdbcType=BIGINT},
+      group_msg_type = #{groupMsgType,jdbcType=INTEGER},
+      group_file_id = #{groupFileId,jdbcType=VARCHAR},
+      group_msg_send_mei_id = #{groupMsgSendMeiId,jdbcType=BIGINT},
+      group_msg = #{groupMsg,jdbcType=VARCHAR},
+      group_send_time = #{groupSendTime,jdbcType=TIMESTAMP},
+      group_msg_timeout = #{groupMsgTimeout,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.web.mapper.FriendMsgMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.web.model.FriendMsg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="msg_send_mei_id" jdbcType="BIGINT" property="msgSendMeiId" />
+    <result column="msg_rec_mei_id" jdbcType="BIGINT" property="msgRecMeiId" />
+    <result column="msg_type" jdbcType="INTEGER" property="msgType" />
+    <result column="msg_send_time" jdbcType="TIMESTAMP" property="msgSendTime" />
+    <result column="msg_text" jdbcType="VARCHAR" property="msgText" />
+    <result column="msg_timeout" jdbcType="INTEGER" property="msgTimeout" />
+    <result column="msg_status" jdbcType="INTEGER" property="msgStatus" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, msg_send_mei_id, msg_rec_mei_id, msg_type, msg_send_time, msg_text, msg_timeout, 
+    msg_status, device_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_myfriend_msg
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_myfriend_msg
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.web.model.FriendMsg">
+    insert into t_myfriend_msg (id, msg_send_mei_id, msg_rec_mei_id, 
+      msg_type, msg_send_time, msg_text, 
+      msg_timeout, msg_status, device_id, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{msgSendMeiId,jdbcType=BIGINT}, #{msgRecMeiId,jdbcType=BIGINT}, 
+      #{msgType,jdbcType=INTEGER}, #{msgSendTime,jdbcType=TIMESTAMP}, #{msgText,jdbcType=VARCHAR}, 
+      #{msgTimeout,jdbcType=INTEGER}, #{msgStatus,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.web.model.FriendMsg">
+    insert into t_myfriend_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="msgSendMeiId != null">
+        msg_send_mei_id,
+      </if>
+      <if test="msgRecMeiId != null">
+        msg_rec_mei_id,
+      </if>
+      <if test="msgType != null">
+        msg_type,
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time,
+      </if>
+      <if test="msgText != null">
+        msg_text,
+      </if>
+      <if test="msgTimeout != null">
+        msg_timeout,
+      </if>
+      <if test="msgStatus != null">
+        msg_status,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="msgSendMeiId != null">
+        #{msgSendMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="msgRecMeiId != null">
+        #{msgRecMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="msgSendTime != null">
+        #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgText != null">
+        #{msgText,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTimeout != null">
+        #{msgTimeout,jdbcType=INTEGER},
+      </if>
+      <if test="msgStatus != null">
+        #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.web.model.FriendMsg">
+    update t_myfriend_msg
+    <set>
+      <if test="msgSendMeiId != null">
+        msg_send_mei_id = #{msgSendMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="msgRecMeiId != null">
+        msg_rec_mei_id = #{msgRecMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="msgType != null">
+        msg_type = #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgText != null">
+        msg_text = #{msgText,jdbcType=VARCHAR},
+      </if>
+      <if test="msgTimeout != null">
+        msg_timeout = #{msgTimeout,jdbcType=INTEGER},
+      </if>
+      <if test="msgStatus != null">
+        msg_status = #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.web.model.FriendMsg">
+    update t_myfriend_msg
+    set msg_send_mei_id = #{msgSendMeiId,jdbcType=BIGINT},
+      msg_rec_mei_id = #{msgRecMeiId,jdbcType=BIGINT},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      msg_text = #{msgText,jdbcType=VARCHAR},
+      msg_timeout = #{msgTimeout,jdbcType=INTEGER},
+      msg_status = #{msgStatus,jdbcType=INTEGER},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

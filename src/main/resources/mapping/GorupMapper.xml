@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.web.mapper.GorupMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.web.model.Gorup">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_mei_id" jdbcType="BIGINT" property="groupMeiId" />
+    <result column="group_sn_id" jdbcType="VARCHAR" property="groupSnId" />
+    <result column="group_role" jdbcType="INTEGER" property="groupRole" />
+    <result column="group_createtime" jdbcType="TIMESTAMP" property="groupCreatetime" />
+    <result column="group_userNumber" jdbcType="INTEGER" property="groupUsernumber" />
+    <result column="group_status" jdbcType="INTEGER" property="groupStatus" />
+    <result column="group_phote" jdbcType="VARCHAR" property="groupPhote" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_name, group_mei_id, group_sn_id, group_role, group_createtime, group_userNumber, 
+    group_status, group_phote
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.web.model.Gorup">
+    insert into t_group (id, group_name, group_mei_id, 
+      group_sn_id, group_role, group_createtime, 
+      group_userNumber, group_status, group_phote
+      )
+    values (#{id,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{groupMeiId,jdbcType=BIGINT}, 
+      #{groupSnId,jdbcType=VARCHAR}, #{groupRole,jdbcType=INTEGER}, #{groupCreatetime,jdbcType=TIMESTAMP}, 
+      #{groupUsernumber,jdbcType=INTEGER}, #{groupStatus,jdbcType=INTEGER}, #{groupPhote,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.web.model.Gorup">
+    insert into t_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupMeiId != null">
+        group_mei_id,
+      </if>
+      <if test="groupSnId != null">
+        group_sn_id,
+      </if>
+      <if test="groupRole != null">
+        group_role,
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime,
+      </if>
+      <if test="groupUsernumber != null">
+        group_userNumber,
+      </if>
+      <if test="groupStatus != null">
+        group_status,
+      </if>
+      <if test="groupPhote != null">
+        group_phote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMeiId != null">
+        #{groupMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="groupSnId != null">
+        #{groupSnId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupRole != null">
+        #{groupRole,jdbcType=INTEGER},
+      </if>
+      <if test="groupCreatetime != null">
+        #{groupCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupUsernumber != null">
+        #{groupUsernumber,jdbcType=INTEGER},
+      </if>
+      <if test="groupStatus != null">
+        #{groupStatus,jdbcType=INTEGER},
+      </if>
+      <if test="groupPhote != null">
+        #{groupPhote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.web.model.Gorup">
+    update t_group
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupMeiId != null">
+        group_mei_id = #{groupMeiId,jdbcType=BIGINT},
+      </if>
+      <if test="groupSnId != null">
+        group_sn_id = #{groupSnId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupRole != null">
+        group_role = #{groupRole,jdbcType=INTEGER},
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime = #{groupCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupUsernumber != null">
+        group_userNumber = #{groupUsernumber,jdbcType=INTEGER},
+      </if>
+      <if test="groupStatus != null">
+        group_status = #{groupStatus,jdbcType=INTEGER},
+      </if>
+      <if test="groupPhote != null">
+        group_phote = #{groupPhote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.web.model.Gorup">
+    update t_group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      group_mei_id = #{groupMeiId,jdbcType=BIGINT},
+      group_sn_id = #{groupSnId,jdbcType=VARCHAR},
+      group_role = #{groupRole,jdbcType=INTEGER},
+      group_createtime = #{groupCreatetime,jdbcType=TIMESTAMP},
+      group_userNumber = #{groupUsernumber,jdbcType=INTEGER},
+      group_status = #{groupStatus,jdbcType=INTEGER},
+      group_phote = #{groupPhote,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

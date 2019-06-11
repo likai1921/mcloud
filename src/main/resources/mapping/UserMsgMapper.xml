@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.web.mapper.UserMsgMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.web.model.UserMsg">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_msg_id" jdbcType="BIGINT" property="groupMsgId" />
+    <result column="send_meiid" jdbcType="BIGINT" property="sendMeiid" />
+    <result column="rec_meiid" jdbcType="BIGINT" property="recMeiid" />
+    <result column="sendtime" jdbcType="TIMESTAMP" property="sendtime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="msg_content" jdbcType="VARCHAR" property="msgContent" />
+    <result column="msg_type" jdbcType="INTEGER" property="msgType" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_id, group_msg_id, send_meiid, rec_meiid, sendtime, status, msg_content, 
+    msg_type, device_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_group_usermsg
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_group_usermsg
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.web.model.UserMsg">
+    insert into t_group_usermsg (id, group_id, group_msg_id, 
+      send_meiid, rec_meiid, sendtime, 
+      status, msg_content, msg_type, 
+      device_id, create_time)
+    values (#{id,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{groupMsgId,jdbcType=BIGINT}, 
+      #{sendMeiid,jdbcType=BIGINT}, #{recMeiid,jdbcType=BIGINT}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{msgContent,jdbcType=VARCHAR}, #{msgType,jdbcType=INTEGER}, 
+      #{deviceId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.web.model.UserMsg">
+    insert into t_group_usermsg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupMsgId != null">
+        group_msg_id,
+      </if>
+      <if test="sendMeiid != null">
+        send_meiid,
+      </if>
+      <if test="recMeiid != null">
+        rec_meiid,
+      </if>
+      <if test="sendtime != null">
+        sendtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="msgContent != null">
+        msg_content,
+      </if>
+      <if test="msgType != null">
+        msg_type,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsgId != null">
+        #{groupMsgId,jdbcType=BIGINT},
+      </if>
+      <if test="sendMeiid != null">
+        #{sendMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="recMeiid != null">
+        #{recMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null">
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="msgContent != null">
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null">
+        #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.web.model.UserMsg">
+    update t_group_usermsg
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupMsgId != null">
+        group_msg_id = #{groupMsgId,jdbcType=BIGINT},
+      </if>
+      <if test="sendMeiid != null">
+        send_meiid = #{sendMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="recMeiid != null">
+        rec_meiid = #{recMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="sendtime != null">
+        sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="msgContent != null">
+        msg_content = #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgType != null">
+        msg_type = #{msgType,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.web.model.UserMsg">
+    update t_group_usermsg
+    set group_id = #{groupId,jdbcType=BIGINT},
+      group_msg_id = #{groupMsgId,jdbcType=BIGINT},
+      send_meiid = #{sendMeiid,jdbcType=BIGINT},
+      rec_meiid = #{recMeiid,jdbcType=BIGINT},
+      sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      msg_content = #{msgContent,jdbcType=VARCHAR},
+      msg_type = #{msgType,jdbcType=INTEGER},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.web.mapper.FriendVerifyMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.web.model.FriendVerify">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="meiid" jdbcType="BIGINT" property="meiid" />
+    <result column="friend_meiid" jdbcType="BIGINT" property="friendMeiid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_send" jdbcType="INTEGER" property="isSend" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, meiid, friend_meiid, status, create_time, is_send, device_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_myfriend_verify
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_myfriend_verify
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.web.model.FriendVerify">
+    insert into t_myfriend_verify (id, meiid, friend_meiid, 
+      status, create_time, is_send, 
+      device_id)
+    values (#{id,jdbcType=BIGINT}, #{meiid,jdbcType=BIGINT}, #{friendMeiid,jdbcType=BIGINT}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{isSend,jdbcType=INTEGER}, 
+      #{deviceId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.web.model.FriendVerify">
+    insert into t_myfriend_verify
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="meiid != null">
+        meiid,
+      </if>
+      <if test="friendMeiid != null">
+        friend_meiid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isSend != null">
+        is_send,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="meiid != null">
+        #{meiid,jdbcType=BIGINT},
+      </if>
+      <if test="friendMeiid != null">
+        #{friendMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSend != null">
+        #{isSend,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.web.model.FriendVerify">
+    update t_myfriend_verify
+    <set>
+      <if test="meiid != null">
+        meiid = #{meiid,jdbcType=BIGINT},
+      </if>
+      <if test="friendMeiid != null">
+        friend_meiid = #{friendMeiid,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isSend != null">
+        is_send = #{isSend,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.web.model.FriendVerify">
+    update t_myfriend_verify
+    set meiid = #{meiid,jdbcType=BIGINT},
+      friend_meiid = #{friendMeiid,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_send = #{isSend,jdbcType=INTEGER},
+      device_id = #{deviceId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
