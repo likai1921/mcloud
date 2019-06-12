@@ -31,4 +31,9 @@ public interface CfgService {
 	 * 删除对象
 	 */
 	public  void deleteCfg(long id);
+	
+	/**
+	 * 添加对象
+	 */
+	public void  addCfg(Cfg cfg);
 }

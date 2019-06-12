@@ -7,73 +7,79 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cloud.web.mapper.CfgMapper;
 import com.cloud.web.model.Cfg;
 import com.cloud.web.service.CfgService;
-import com.mysql.cj.xdevapi.SessionFactory;
 
 @Service
-public class CfgServiceImpl implements CfgService{
-	
-	private Logger logger =LoggerFactory.getLogger(CfgServiceImpl.class);
+public class CfgServiceImpl implements CfgService {
+
+	private Logger logger = LoggerFactory.getLogger(CfgServiceImpl.class);
 	@Autowired
 	private CfgMapper cfgMapper;
+
 	@Override
-	public void  insertCfg(Cfg cgf) {
+	public void insertCfg(Cfg cgf) {
 		cfgMapper.insert(cgf);
 	}
+
 	/**
-	 * 查询配置文件list集合	
+	 * 查询配置文件list集合
 	 */
 	@Override
 	public List<Cfg> selectCfgList() {
-		List<Cfg> list=new ArrayList<Cfg>();
-		
+		List<Cfg> list = new ArrayList<Cfg>();
+
 		try {
 			logger.info("selectCfgList start ...............");
-			list= cfgMapper.selectCfgList();
-			
+			list = cfgMapper.selectCfgList();
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("selectCfgList error message{},error{}",e.getMessage(),e.getStackTrace());
+			logger.error("selectCfgList error message{},error{}", e.getMessage(), e.getStackTrace());
 		}
 		return list;
 	}
+
 	@Override
 	public List<Cfg> getAll() {
-		List<Cfg> list=new ArrayList<Cfg>();
+		List<Cfg> list = new ArrayList<Cfg>();
 		try {
 			logger.info("getAll start ...............");
-			list= cfgMapper.getAll();
+			list = cfgMapper.getAll();
 			logger.info("getAll end ...............");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("getAll error message{},error{}",e.getMessage(),e.getStackTrace());
+
+			logger.error("getAll error message{},error{}", e.getMessage(), e.getStackTrace());
 		}
 		return list;
 	}
-	
-	
+
 	@Override
 	public Cfg selectCfgById(long id) {
-		Cfg cfg=null;
+		Cfg cfg = null;
 		try {
 			logger.info("selectCfgById start ...............");
-			cfg= cfgMapper.selectCfgById(id);
+			cfg = cfgMapper.selectCfgById(id);
 			logger.info("selectCfgById end ...............");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("selectCfgById error message{},error{}",e.getMessage(),e.getStackTrace());
+			logger.error("selectCfgById error message{},error{}", e.getMessage(), e.getStackTrace());
 		}
 		return cfg;
 	}
+
 	/**
-	 * 删除对象	
+	 * 删除对象
 	 */
 	@Override
 	public void deleteCfg(long id) {
-		if(id==0){
+		if (id == 0) {
 			return;
 		}
 		try {
@@ -82,9 +88,32 @@ public class CfgServiceImpl implements CfgService{
 			logger.info("deleteCfg end ...............");
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("deleteCfg error message{},error{}",e.getMessage(),e.getStackTrace());
+			logger.error("deleteCfg error message{},error{}", e.getMessage(), e.getStackTrace());
+
 		}
-		
+
+	}
+
+	/**
+	 * 添加对象
+	 * 增加事务回滚
+	 */
+	@Transactional( isolation = Isolation.READ_COMMITTED , propagation =  Propagation.REQUIRED ,rollbackFor = Exception.class)
+	@Override
+	public void addCfg(Cfg cfg) {
+		try {
+			cfgMapper.insert(cfg);
+
+			/*
+			 * boolean flag = true; if (flag) { throw new RuntimeException(); }
+			 */
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("deleteCfg error message{},error{}", e.getMessage(), e.getStackTrace());
+			throw new RuntimeException("运行异常了需要回滚！");
+		}
+
 	}
 
 }
