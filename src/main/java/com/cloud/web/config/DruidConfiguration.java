@@ -23,7 +23,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
 
 /**
  * druid 连接池配置类
- * 
+ *  连接池
  * @author lk
  * @date 2019.6.4
  *

@@ -4,12 +4,12 @@
       <li>
         <el-input v-model="name" size="mini" placeholder="请输入名称" @keydown.enter="search" />
       </li>
-      <li>
-        模型：
-        <el-select v-model="status" size="mini" filterable clearable placeholder="请选择状态" @change="search">
-          <el-option v-for="item in statuslist" :key="item.status" :label="item.name" :value="item.status" />
-        </el-select>
-      </li>
+<!--      <li>-->
+<!--        模型：-->
+<!--        <el-select v-model="status" size="mini" filterable clearable placeholder="请选择状态" @change="search">-->
+<!--          <el-option v-for="item in statuslist" :key="item.status" :label="item.name" :value="item.status" />-->
+<!--        </el-select>-->
+<!--      </li>-->
       <li>
         <el-button size="mini" type="primary" @click="search">搜索</el-button>
       </li>
